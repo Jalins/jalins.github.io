@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Jalins">
+  
+  
+  
+  <link rel="prev" href="https://jalins.github.io/2018/%E5%8C%BA%E5%9D%97%E9%93%BE100%E7%AF%87%E4%B9%8B%E7%AC%AC%E4%BA%8C%E7%AF%87-p2p%E4%B8%8E%E6%AF%94%E7%89%B9%E5%B8%81%E7%9A%84%E6%94%AF%E4%BB%98%E4%B8%8E%E4%BA%A4%E6%98%93/" />
+  <link rel="next" href="https://jalins.github.io/2018/%E5%8C%BA%E5%9D%97%E9%93%BE100%E7%AF%87%E4%B9%8B%E7%AC%AC%E5%9B%9B%E7%AF%87-%E7%9F%BF%E5%B7%A5%E5%8F%8A%E6%8C%96%E7%9F%BF/" />
+  <link rel="canonical" href="https://jalins.github.io/2018/%E5%8C%BA%E5%9D%97%E9%93%BE100%E7%AF%87%E4%B9%8B%E7%AC%AC%E4%B8%89%E7%AF%87-%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           区块链100篇之第三篇--数字签名 | Jalins 博客
+       
+  </title>
+  <meta name="title" content="区块链100篇之第三篇--数字签名 | Jalins 博客">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/jalins.github.io\/"
+    },
+    "articleSection" : "posts",
+    "name" : "区块链100篇之第三篇--数字签名",
+    "headline" : "区块链100篇之第三篇--数字签名",
+    "description" : "区块链100篇之第三篇\x26ndash;数字签名 数字签名类似于我们现实世界中的文件签名，我们把名字写在一个文件上，就代表了我们认可了这份文件，并且说明了这份文件是真是可靠的，那么问题是如果文件的署名被伪造了怎么办？在现实世界中，我们一般会找当事人直接验证这份文件是否是亲自签署的而不是被人假冒的，而在计算机世界中，保证数字签名不被伪造是通过数字摘要和非对称加密实现的，举个比特币中交易的例子:假如现在Alice发起一笔比特币转账，需要先将该交易进行数字摘要，缩短成一段字符串，然后用自己的私钥对摘要进行加密，形成数字签名。完成后，需要将交易信息（使用接收者的公钥进行加密）和数字签名一起广播给记录“账本的人”也就是矿工。矿工用Alice的公钥进行验证，如果验证成功，说明该笔交易确实是Alice发出的，且信息未被更改，是完整的。 下面就来详细讲解这数字摘要和非对称加密技术，讲完之后再回过头来看这个例子就明白了。\n 数字摘要\n 数字摘要技术用于对所要传输的数据进行运算生成信息摘要，它并不是一种加密机制，但却能产生信息的数字\x26rdquo;指纹\x26rdquo;，它的目的是为了确保数据没有被修改或变化，保证信息的完整性不被破坏。说直白点就是将数据进行hash编码。它在数字签名中的作用就是增加被伪造的难度，就好比有些人故意把字要写的龙凤凤舞，目的就是很难让他人伪造。\n 非对称加密\n 讲到非对称加密我们需要了解一下什么是对称加密，举个例子：现在你（未成年）跟你朋友想聊一个比较敏感的话题（比如\x26hellip;），但是你怕你老妈会翻看你手机，要是让她知道你跟别人聊这种话题肯定会挨骂，于是你就跟你的朋友约定好你将中文先翻译成英文再发过去，然后他那边可以使用微信翻译将英文翻译成中文，这样即使老妈看到了也无所谓，因为她根本看不懂英语，于是你跟你的朋友便聊了起来：\n  你：The XiaoHua in the class are so beautiful that I want to chase her.（班里的小花好漂亮，我想追她） 你朋友：I also think she\x26rsquo;s pretty.（我也觉得她好漂亮） \x26hellip;\x26hellip;   这里的“班里的小花好漂亮，我想追她”就是明文，而“The XiaoHua in the class are so beautiful that I want to chase her.”就是密文，而密钥就是将“班里的小花好漂亮，我想追她”转化成“The XiaoHua in the class are so beautiful that I want to chase her.”这么一个规则，讲到这大概就清楚了什么是对称加密了吧，可以这么理解： \x26gt; * 一方通过密钥将信息加密后，把密文传给另一方，另一方通过这个相同的密钥将密文解密，转换成可以理解的明文。他们之间的关系： 明文 \x26lt;-\x26gt; 密钥 \x26lt;-\x26gt; 密文",
+    "inLanguage" : "zh-cn",
+    "author" : "Jalins",
+    "creator" : "Jalins",
+    "publisher": "Jalins",
+    "accountablePerson" : "Jalins",
+    "copyrightHolder" : "Jalins",
+    "copyrightYear" : "2018",
+    "datePublished": "2018-04-09 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2018-04-09 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/jalins.github.io\/2018\/%E5%8C%BA%E5%9D%97%E9%93%BE100%E7%AF%87%E4%B9%8B%E7%AC%AC%E4%B8%89%E7%AF%87-%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D\/",
+    "wordCount" : "67",
+    "keywords" : [ "基础知识", "Jalins 博客"]
+}
+</script>
+
+
+ 
+</head>
+
+  
+
+
+
+
+<script src="//cdn.busuanzi.ibruce.info/cdn/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+<script >
+    $(document).ready(function() {
+        var int = setInterval(fixCount, 50);  
+        var countOffset = parseInt(990);  
+       function fixCount() {                   
+         if ($("#busuanzi_container_site_pv").css("display") != "none")
+           {
+              $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+              clearInterval(int); 
+         }  
+     }           
+    });
+</script>
+
+
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://jalins.github.io/">Jalins 博客</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">博文</a>
+                
+                <a class="menu-item" href="/categories/" title="">分类</a>
+                
+                <a class="menu-item" href="/tags/" title="">标签</a>
+                
+                <a class="menu-item" href="/about/" title="">关于</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://jalins.github.io/">Jalins 博客</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">博文</a>
+                
+                <a class="menu-item" href="/categories/" title="">分类</a>
+                
+                <a class="menu-item" href="/tags/" title="">标签</a>
+                
+                <a class="menu-item" href="/about/" title="">关于</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">区块链100篇之第三篇--数字签名</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://jalins.github.io/" rel="author">Jalins</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2018-04-09 itemprop="datePublished">April 9, 2018</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://jalins.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"> 区块链 </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h1 id="区块链100篇之第三篇-数字签名">区块链100篇之第三篇&ndash;数字签名</h1>
+
+<hr />
+
+<p>数字签名类似于我们现实世界中的文件签名，我们把名字写在一个文件上，就代表了我们认可了这份文件，并且说明了这份文件是真是可靠的，那么问题是如果文件的署名被伪造了怎么办？在现实世界中，我们一般会找当事人直接验证这份文件是否是亲自签署的而不是被人假冒的，而在计算机世界中，保证数字签名不被伪造是通过数字摘要和非对称加密实现的，举个比特币中交易的例子:假如现在Alice发起一笔比特币转账，需要先将该交易进行数字摘要，缩短成一段字符串，然后用自己的私钥对摘要进行加密，形成数字签名。完成后，需要将交易信息（使用接收者的公钥进行加密）和数字签名一起广播给记录“账本的人”也就是矿工。矿工用Alice的公钥进行验证，如果验证成功，说明该笔交易确实是Alice发出的，且信息未被更改，是完整的。
+下面就来详细讲解这数字摘要和非对称加密技术，讲完之后再回过头来看这个例子就明白了。</p>
+
+<blockquote>
+<p>数字摘要</p>
+</blockquote>
+
+<p>数字摘要技术用于对所要传输的数据进行运算生成信息摘要，它并不是一种加密机制，但却能产生信息的数字&rdquo;指纹&rdquo;，它的目的是为了确保数据没有被修改或变化，保证信息的完整性不被破坏。说直白点就是将数据进行hash编码。它在数字签名中的作用就是增加被伪造的难度，就好比有些人故意把字要写的龙凤凤舞，目的就是很难让他人伪造。</p>
+
+<blockquote>
+<p>非对称加密</p>
+</blockquote>
+
+<p>讲到非对称加密我们需要了解一下什么是对称加密，举个例子：现在你（未成年）跟你朋友想聊一个比较敏感的话题（比如&hellip;），但是你怕你老妈会翻看你手机，要是让她知道你跟别人聊这种话题肯定会挨骂，于是你就跟你的朋友约定好你将中文先翻译成英文再发过去，然后他那边可以使用微信翻译将英文翻译成中文，这样即使老妈看到了也无所谓，因为她根本看不懂英语，于是你跟你的朋友便聊了起来：</p>
+
+<blockquote>
+<ul>
+<li>你：The XiaoHua in the class are so beautiful that I want to chase her.（班里的小花好漂亮，我想追她）</li>
+<li>你朋友：I also think she&rsquo;s pretty.（我也觉得她好漂亮）</li>
+<li>&hellip;&hellip;</li>
+</ul>
+</blockquote>
+
+<p>这里的“班里的小花好漂亮，我想追她”就是明文，而“The XiaoHua in the class are so beautiful that I want to chase her.”就是密文，而密钥就是将“班里的小花好漂亮，我想追她”转化成“The XiaoHua in the class are so beautiful that I want to chase her.”这么一个规则，讲到这大概就清楚了什么是对称加密了吧，可以这么理解：
+&gt; * 一方通过密钥将信息加密后，把密文传给另一方，另一方通过这个相同的密钥将密文解密，转换成可以理解的明文。他们之间的关系： 明文 &lt;-&gt; 密钥 &lt;-&gt; 密文</p>
+
+<p>理解了什么是对称加密后你可能有一个疑问，那如果老妈使用了微信翻译将发送出去的英文翻译成中文她不就看懂了吗?对的，这就是对称加密的缺陷，一旦被人拿到了密钥（在对称加密中，密钥就是加解密的规则），那么你发送出去的密文将轻而易举被人破解，那么有什么方法做到即使一个人的密钥被盗窃了，最起码保证你给其他人发送密文不被破解？就是说即使你老妈获取到了你的密钥，但她仍然无法破解你发送出去的信息，只有你的朋友才能查看你发送给他的信息。这个就是我们要讲的非对称加密。</p>
+
+<p>在非对称加密中，不管是信息的发送方还是信息的接收方都有一对属于自己的公钥和密钥，公钥顾名思义就是可以公开，而私钥就是只能自己看，不能给别人拿到。接着发送方会将信息进行数字摘要并使用接收方的公钥进行加密，然后再使用自己的私钥对数字摘要进行加密，接收方收到加密后的信息跟加密串，用 发送方的公钥（因为公钥是公开的）来解密加密串，得到原始的数字摘要，然后对使用自己的私钥进行解密的信息进行摘要后的结果进行比对。如果一致，说明该文件确实是该发送方发过来的，并且文件内容没有被修改过。</p>
+
+<p>还是上面那个例子，你使用你朋友（暂且称为A）的公钥对你的信息进行加密，并且对信息进行数字摘要，然后使用你自己的私钥对摘要进行加密，即数字签名，然后将数字签名和加密后的信息一起发送给A，A接收到信息后，先使用你的公钥对数字签名进行解密，证明该信息确实是你发送过来的而不是别人发送过来的，然后再使用自己的私钥对加密后的信息进行解密（注意这里只有A的私钥才能解密信息，其他人都不可以，即使是你本人也不能解密，所以就算是你老妈拿到了你的私钥也没办法破解该信息），然后对该信息使用同样的算法进行数字摘要，如果得到的摘要跟你发送过来的摘要一致，则说明信息在传递的过程中没有被修改过。</p>
+
+<p>好了，到这里基本上是讲完了，其他的如果有兴趣自行上网搜集材料学习。</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Jalins </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://jalins.github.io/2018/%E5%8C%BA%E5%9D%97%E9%93%BE100%E7%AF%87%E4%B9%8B%E7%AC%AC%E4%B8%89%E7%AF%87-%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D/>https://jalins.github.io/2018/%E5%8C%BA%E5%9D%97%E9%93%BE100%E7%AF%87%E4%B9%8B%E7%AC%AC%E4%B8%89%E7%AF%87-%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D/</span>
+            </p>
+            
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://jalins.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+                    #基础知识</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://jalins.github.io/">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://jalins.github.io/2018/%E5%8C%BA%E5%9D%97%E9%93%BE100%E7%AF%87%E4%B9%8B%E7%AC%AC%E4%BA%8C%E7%AF%87-p2p%E4%B8%8E%E6%AF%94%E7%89%B9%E5%B8%81%E7%9A%84%E6%94%AF%E4%BB%98%E4%B8%8E%E4%BA%A4%E6%98%93/" class="prev" rel="prev" title="区块链100篇之第二篇--P2P与比特币的支付与交易"><i class="iconfont icon-left"></i>&nbsp;区块链100篇之第二篇--P2P与比特币的支付与交易</a>
+         
+        
+        <a href="https://jalins.github.io/2018/%E5%8C%BA%E5%9D%97%E9%93%BE100%E7%AF%87%E4%B9%8B%E7%AC%AC%E5%9B%9B%E7%AF%87-%E7%9F%BF%E5%B7%A5%E5%8F%8A%E6%8C%96%E7%9F%BF/" class="next" rel="next" title="区块链100篇之第四篇--矿工及挖矿">区块链100篇之第四篇--矿工及挖矿&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2018 - 2019</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://jalins.github.io/">Jalins</a> | </span> 
+         
+
+         
+        
+        <span id="busuanzi_container_site_pv">
+         本站访问量：<span id="busuanzi_value_site_pv"></span>次
+     </span>
+     &nbsp;
+     <span id="busuanzi_container_site_uv">
+         您是本站第 <span id="busuanzi_value_site_uv"></span> 位访问者
+     </span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

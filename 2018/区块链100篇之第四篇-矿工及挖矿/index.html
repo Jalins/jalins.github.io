@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Jalins">
+  
+  
+  
+  <link rel="prev" href="https://jalins.github.io/2018/%E5%8C%BA%E5%9D%97%E9%93%BE100%E7%AF%87%E4%B9%8B%E7%AC%AC%E4%B8%89%E7%AF%87-%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D/" />
+  <link rel="next" href="https://jalins.github.io/2018/%E5%8C%BA%E5%9D%97%E9%93%BE100%E7%AF%87%E4%B9%8B%E7%AC%AC%E4%BA%94%E7%AF%87-utxo/" />
+  <link rel="canonical" href="https://jalins.github.io/2018/%E5%8C%BA%E5%9D%97%E9%93%BE100%E7%AF%87%E4%B9%8B%E7%AC%AC%E5%9B%9B%E7%AF%87-%E7%9F%BF%E5%B7%A5%E5%8F%8A%E6%8C%96%E7%9F%BF/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           区块链100篇之第四篇--矿工及挖矿 | Jalins 博客
+       
+  </title>
+  <meta name="title" content="区块链100篇之第四篇--矿工及挖矿 | Jalins 博客">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/jalins.github.io\/"
+    },
+    "articleSection" : "posts",
+    "name" : "区块链100篇之第四篇--矿工及挖矿",
+    "headline" : "区块链100篇之第四篇--矿工及挖矿",
+    "description" : "区块链100篇之第四篇\x26ndash;矿工及挖矿 在第二篇中我遗留了一个问题，就是虽然收款人没办法验证付款人是否真的有足够的余额进行支付转账（因为现在没有一个中心机构进行认证），所以这时候就需要矿工来进行确认，对于为什么需要矿工这个角色和矿工是干什么的以及挖矿的过程，下面就来一一细说。\n 为什么需要矿工？\n 比特币是一个点对点去中心化的网络，在这个网络里任何人都可以参与进来，成为这个网络中的节点（普通节点或者矿工节点），正因为比特币的世界中没有一个中心机构来确保比特币整个系统的正常运行（这与我们现在中心化系统不一样，是比特币的一大魅力），那么如何确保比特币正常运行呢？这就需要矿工了。\n 矿工是干什么的？\n 因为比特币的交易需要进行确认，并需要将多笔交易打包成区块，矿工便是干这个的。矿工接收到用户广播的账单后，要对账单的合法性和真实性进行验证，这里的合法性，是指矿工会检验支付方的比特币是否充足。矿工们按照交易中支付方的地址，在过往合法的交易中查询该账户“转入”的比特币数量，当大于或者等于本账单中填写的数额时，这笔交易就是合法的，这回答了我们一开头的那个问题；接着矿工需要开始用不同的随机数进行哈希计算，直至找到符合目标值特征的随机数，如果找到了这个随机数，矿工需要将在 10 分钟左右发生的验证过的交易内容打包成一个不超过1MB大小的区块，然后全网广播出去，告诉其他矿工节点已经生成一个新的区块了，你们不需要再进行随机数的计算了，于是其他矿工就会进行验证这个随机数是否是正确的，如果通过了验那么这个新区块就会被添加到最长链的尾部（为什么说最长链，这里涉及到比特币的分叉，在第七篇讲），然后他们就会放弃当前区块的计算，马上继续下一个区块的随机数计算。\n举个例子就是现在我和小明、小花、小白以及小李进行记账竞赛（谁赢了谁就有糖吃，所以都很努力的记账），我们都把每一笔有效的交易记录在一个本子上，因为我们的记账速度都差不多，所以我们几乎是同时把本子上的一页纸（相当于一个区块）写满，这个时候并不能以谁记账速度快来分胜负（因为大家几乎同时完成记账），所以我们还需要进行计算一道数学方程题，谁先接触这道题谁就可以获得糖果；于是大家开始埋头计算数学题，假设这时小明最先解除了答案，于是他就大喊一声，“我解出来”，这时大家就开始停下手上的计算工作，开始验证小明的答案是否就是这道题的解，结果大家都认为小明解出了答案，于是这颗糖（比特币）便属于小明的了。\n 挖矿的过程\n 挖矿的过程其实就类似于解题，谁先找到答案谁就获得记账权，从而获得比特币奖励。 挖矿的具体过程为：参与者根据上一个区块的hash值，10分钟内的验证过的交易内容，再加上自己猜测的一个随机数X，让新区块的hash值小于比特币网络中给定的一个数。这个数越小，计算出来就越难。系统每隔两周（即经过2016个区块）会根据上一周期的挖矿时间来调整挖矿难度（通过调整限制数的大小），来调节生成区块的时间稳定在10分钟左右。为了避免震荡，每次调整的最大幅度为 4 倍。\n 比特币如何保证矿工积极挖矿？\n 我在第一篇讲比特币的时候有简单提到过比特币的奖励机制，比特币的激励机制就是奖励矿工一些比特币用来激励矿工积极的记账以此来达到整个系统稳定运行的效果，所以矿工节点就需要不断的提高自己的算力来争夺打包区块的权力，因为你的算力越大你就有可能先计算出符合某一个标准的比特币区块头的哈希散列值，这就是工作量证明共识机制，简称POW，除了POW外还有POS、DPOS、RAFT等等（这个留到第六篇讲共识机制的时候再说）。比特币是通过工作量证明的共识机制来决定记账权的，通俗来讲，谁证明了自己的工作量最大，谁就负责记账。 矿工除了可以得到比特币网络奖励的比特币，还可以获得每一笔交易的手续费，奖励手续费可以保证当所有的比特币发行完毕后（总量2100万，预计到2140年发完）比特币网络仍然可以正常运行。",
+    "inLanguage" : "zh-cn",
+    "author" : "Jalins",
+    "creator" : "Jalins",
+    "publisher": "Jalins",
+    "accountablePerson" : "Jalins",
+    "copyrightHolder" : "Jalins",
+    "copyrightYear" : "2018",
+    "datePublished": "2018-04-11 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2018-04-11 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/jalins.github.io\/2018\/%E5%8C%BA%E5%9D%97%E9%93%BE100%E7%AF%87%E4%B9%8B%E7%AC%AC%E5%9B%9B%E7%AF%87-%E7%9F%BF%E5%B7%A5%E5%8F%8A%E6%8C%96%E7%9F%BF\/",
+    "wordCount" : "17",
+    "keywords" : [ "基础知识", "Jalins 博客"]
+}
+</script>
+
+
+ 
+</head>
+
+  
+
+
+
+
+<script src="//cdn.busuanzi.ibruce.info/cdn/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+<script >
+    $(document).ready(function() {
+        var int = setInterval(fixCount, 50);  
+        var countOffset = parseInt(990);  
+       function fixCount() {                   
+         if ($("#busuanzi_container_site_pv").css("display") != "none")
+           {
+              $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+              clearInterval(int); 
+         }  
+     }           
+    });
+</script>
+
+
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://jalins.github.io/">Jalins 博客</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">博文</a>
+                
+                <a class="menu-item" href="/categories/" title="">分类</a>
+                
+                <a class="menu-item" href="/tags/" title="">标签</a>
+                
+                <a class="menu-item" href="/about/" title="">关于</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://jalins.github.io/">Jalins 博客</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">博文</a>
+                
+                <a class="menu-item" href="/categories/" title="">分类</a>
+                
+                <a class="menu-item" href="/tags/" title="">标签</a>
+                
+                <a class="menu-item" href="/about/" title="">关于</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">区块链100篇之第四篇--矿工及挖矿</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://jalins.github.io/" rel="author">Jalins</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2018-04-11 itemprop="datePublished">April 11, 2018</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://jalins.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"> 区块链 </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h1 id="区块链100篇之第四篇-矿工及挖矿">区块链100篇之第四篇&ndash;矿工及挖矿</h1>
+
+<hr />
+
+<p>在第二篇中我遗留了一个问题，就是虽然收款人没办法验证付款人是否真的有足够的余额进行支付转账（因为现在没有一个中心机构进行认证），所以这时候就需要矿工来进行确认，对于为什么需要矿工这个角色和矿工是干什么的以及挖矿的过程，下面就来一一细说。</p>
+
+<blockquote>
+<p>为什么需要矿工？</p>
+</blockquote>
+
+<p>比特币是一个点对点去中心化的网络，在这个网络里任何人都可以参与进来，成为这个网络中的节点（普通节点或者矿工节点），正因为比特币的世界中没有一个中心机构来确保比特币整个系统的正常运行（这与我们现在中心化系统不一样，是比特币的一大魅力），那么如何确保比特币正常运行呢？这就需要矿工了。</p>
+
+<blockquote>
+<p>矿工是干什么的？</p>
+</blockquote>
+
+<p>因为比特币的交易需要进行确认，并需要将多笔交易打包成区块，矿工便是干这个的。矿工接收到用户广播的账单后，要对账单的合法性和真实性进行验证，这里的合法性，是指矿工会检验支付方的比特币是否充足。矿工们按照交易中支付方的地址，在过往合法的交易中查询该账户“转入”的比特币数量，当大于或者等于本账单中填写的数额时，这笔交易就是合法的，这回答了我们一开头的那个问题；接着矿工需要开始用不同的随机数进行哈希计算，直至找到符合目标值特征的随机数，如果找到了这个随机数，矿工需要将在 10 分钟左右发生的验证过的交易内容打包成一个不超过1MB大小的区块，然后全网广播出去，告诉其他矿工节点已经生成一个新的区块了，你们不需要再进行随机数的计算了，于是其他矿工就会进行验证这个随机数是否是正确的，如果通过了验那么这个新区块就会被添加到最长链的尾部（为什么说最长链，这里涉及到比特币的分叉，在第七篇讲），然后他们就会放弃当前区块的计算，马上继续下一个区块的随机数计算。</p>
+
+<p>举个例子就是现在我和小明、小花、小白以及小李进行记账竞赛（谁赢了谁就有糖吃，所以都很努力的记账），我们都把每一笔有效的交易记录在一个本子上，因为我们的记账速度都差不多，所以我们几乎是同时把本子上的一页纸（相当于一个区块）写满，这个时候并不能以谁记账速度快来分胜负（因为大家几乎同时完成记账），所以我们还需要进行计算一道数学方程题，谁先接触这道题谁就可以获得糖果；于是大家开始埋头计算数学题，假设这时小明最先解除了答案，于是他就大喊一声，“我解出来”，这时大家就开始停下手上的计算工作，开始验证小明的答案是否就是这道题的解，结果大家都认为小明解出了答案，于是这颗糖（比特币）便属于小明的了。</p>
+
+<blockquote>
+<p>挖矿的过程</p>
+</blockquote>
+
+<p>挖矿的过程其实就类似于解题，谁先找到答案谁就获得记账权，从而获得比特币奖励。
+挖矿的具体过程为：参与者根据上一个区块的hash值，10分钟内的验证过的交易内容，再加上自己猜测的一个随机数X，让新区块的hash值小于比特币网络中给定的一个数。这个数越小，计算出来就越难。系统每隔两周（即经过2016个区块）会根据上一周期的挖矿时间来调整挖矿难度（通过调整限制数的大小），来调节生成区块的时间稳定在10分钟左右。为了避免震荡，每次调整的最大幅度为 4 倍。</p>
+
+<blockquote>
+<p>比特币如何保证矿工积极挖矿？</p>
+</blockquote>
+
+<p>我在第一篇讲比特币的时候有简单提到过比特币的奖励机制，比特币的激励机制就是奖励矿工一些比特币用来激励矿工积极的记账以此来达到整个系统稳定运行的效果，所以矿工节点就需要不断的提高自己的算力来争夺打包区块的权力，因为你的算力越大你就有可能先计算出符合某一个标准的比特币区块头的哈希散列值，这就是工作量证明共识机制，简称POW，除了POW外还有POS、DPOS、RAFT等等（这个留到第六篇讲共识机制的时候再说）。比特币是通过工作量证明的共识机制来决定记账权的，通俗来讲，谁证明了自己的工作量最大，谁就负责记账。
+矿工除了可以得到比特币网络奖励的比特币，还可以获得每一笔交易的手续费，奖励手续费可以保证当所有的比特币发行完毕后（总量2100万，预计到2140年发完）比特币网络仍然可以正常运行。</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Jalins </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://jalins.github.io/2018/%E5%8C%BA%E5%9D%97%E9%93%BE100%E7%AF%87%E4%B9%8B%E7%AC%AC%E5%9B%9B%E7%AF%87-%E7%9F%BF%E5%B7%A5%E5%8F%8A%E6%8C%96%E7%9F%BF/>https://jalins.github.io/2018/%E5%8C%BA%E5%9D%97%E9%93%BE100%E7%AF%87%E4%B9%8B%E7%AC%AC%E5%9B%9B%E7%AF%87-%E7%9F%BF%E5%B7%A5%E5%8F%8A%E6%8C%96%E7%9F%BF/</span>
+            </p>
+            
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://jalins.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+                    #基础知识</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://jalins.github.io/">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://jalins.github.io/2018/%E5%8C%BA%E5%9D%97%E9%93%BE100%E7%AF%87%E4%B9%8B%E7%AC%AC%E4%B8%89%E7%AF%87-%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D/" class="prev" rel="prev" title="区块链100篇之第三篇--数字签名"><i class="iconfont icon-left"></i>&nbsp;区块链100篇之第三篇--数字签名</a>
+         
+        
+        <a href="https://jalins.github.io/2018/%E5%8C%BA%E5%9D%97%E9%93%BE100%E7%AF%87%E4%B9%8B%E7%AC%AC%E4%BA%94%E7%AF%87-utxo/" class="next" rel="next" title="区块链100篇之第五篇--UTXO">区块链100篇之第五篇--UTXO&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2018 - 2019</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://jalins.github.io/">Jalins</a> | </span> 
+         
+
+         
+        
+        <span id="busuanzi_container_site_pv">
+         本站访问量：<span id="busuanzi_value_site_pv"></span>次
+     </span>
+     &nbsp;
+     <span id="busuanzi_container_site_uv">
+         您是本站第 <span id="busuanzi_value_site_uv"></span> 位访问者
+     </span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Jalins 博客</title>
-    <link>https://jalins.github.io/posts/</link>
-    <description>Recent content in Posts on Jalins 博客</description>
+    <title>区块链 on Jalins 博客</title>
+    <link>https://jalins.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/</link>
+    <description>Recent content in 区块链 on Jalins 博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Mon, 28 May 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://jalins.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jalins.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>

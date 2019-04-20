@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Jalins">
+  
+  
+  
+  <link rel="prev" href="https://jalins.github.io/2018/%E5%8C%BA%E5%9D%97%E9%93%BE100%E7%AF%87%E4%B9%8B%E7%AC%AC%E4%B8%83%E7%AF%87-%E6%AF%94%E7%89%B9%E5%B8%81%E7%9A%84%E5%88%86%E5%8F%89/" />
+  <link rel="next" href="https://jalins.github.io/2018/%E5%8C%BA%E5%9D%97%E9%93%BE100%E7%AF%87%E4%B9%8B%E7%AC%AC%E4%B9%9D%E7%AF%87-%E9%BB%98%E5%85%8B%E5%B0%94%E6%A0%91/" />
+  <link rel="canonical" href="https://jalins.github.io/2018/%E5%8C%BA%E5%9D%97%E9%93%BE100%E7%AF%87%E4%B9%8B%E7%AC%AC%E5%85%AB%E7%AF%87-%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           区块链100篇之第八篇  智能合约 | Jalins 博客
+       
+  </title>
+  <meta name="title" content="区块链100篇之第八篇  智能合约 | Jalins 博客">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/jalins.github.io\/"
+    },
+    "articleSection" : "posts",
+    "name" : "区块链100篇之第八篇  智能合约",
+    "headline" : "区块链100篇之第八篇  智能合约",
+    "description" : "区块链100篇之第八篇\x26ndash;智能合约  一、比特币的转账过程\n 我在第五篇讲UTXO的时候，有提到比特币的转账过程，现在来回顾一下这个过程。 \x26gt; * Bob想要转给Jack一百个比特币，Bob需要先创建一笔交易，因为这笔交易只有被矿工验证并打包进区块的时候才算完成交易，Bob在填写交易信息的时候除了需要提供支付比特币的数额以及双方的地址外，还需要提供自己的公钥以及用私钥生成的数字签名，还有就是上一笔交易的Hash（也就是Bob从哪里得到这些比特币）；信息填完后（其实在现实中没这么复杂，只需要在钱包中填写转入转出地址以及交易金额即可，其他的都是自动的）便可以点击确认，当这笔交易广播到全网中时，矿工开始对这笔交易进行验证，第一步会去找到上一笔交易，确认支付方的比特币来源；接着第二步算出支付方公钥的指纹，确认与支付方的地址一致，从而保证公钥属实；然后第三步是使用公钥去解开数字签名，保证私钥属实。验证通过后矿工便会将这笔交易打包进区块中，如果得到六次以上的确认，则可以认为这笔交易不会再被改变。\n讲这个过程就是为了引出今天的知识点\x26ndash;智能合约。\n 二、比特币与智能合约\n 在上面我有讲到Bob需要提供的交易信息有一个是上一笔的交易Hash，我们可以来看一下区块链中时如何记录这笔交易的（这其实就是一个UTXO），如下图所示： 可以看出Bob转给Jack的100个比特币是从Alice那得到的，图中还可以看到一个解锁信息，这个解锁信息时候用来证明这100个比特币的归属，因为只有Bob的私钥才能进行解锁，其他人进行解锁是无效的。 到这里我们可以将这个UTXO看做是一个简单的智能合约，因为它是一个可自动执行并且自我验证协议，Bob只要输入自己的私钥，解锁脚本就会自动运行校验，解锁成功便说明Bob是这100个比特币的拥有者，反之则说明不是。 因为比特币所支持的脚本语言只跟交易有关，并且不是图灵完备的语言，所能做的事很有限，但是比特币的出现极大地促进了智能合约的发展，现在支持编写智能合约的平台中最有名的当属以太坊。\n 三、智能合约\n 上世纪90年代，密码学家尼克萨博从自动贩卖机得到灵感首次提出“智能合约”的概念，看一下智能合约的定义：\n  智能合约是指一种计算机协议，这类协议一旦制定和部署成功就能实现自我执行（self-executing）和自我验证（self-verifying），而且不再需要人为的干预。   智能合约会对接收到的信息进行回应，它可以接收和储存价值，也可以向外发送信息和价值。看一张图： 从图中可以看出一段代码（智能合约），被部署在分享的、复制的账本上，它可以维持自己的状态，控制自己的资产和对接收到的外界信息或者资产进行回应。 举个例子，现在我们对银行账户内存款的操作都需要中心化的银行进行授权，一旦离开了银行的监管，用户就连最基本的存取款操作都无法进行，但是如果是使用智能合约来处理的话情况就不一样了，只要事先正确的通过严谨的逻辑写好代码，便可以不需要人工参与，一切都将按事先写好的逻辑运行，并且结果是公平公正的，因此也有人宣称“代码即法律”，这个观点保留意见，至少以目前的情况来看事情没那么简单。 智能合约的概念虽然很早就被提出来了，但是因为很多技术的不成熟，所以发展很缓慢，但是因为比特币的出现或者说因为区块链技术的出现，智能合约开始成为研究人员与业内人士重点研究的对象，这都极大促进了智能合约的发展。\n 四、智能合约的优缺点\n 参考《区块链技术指南》简单列出智能合约的优点。\n  首先是高效的实时更新，因为智能合约的执行是去中心化的，也就是不需要认为的干预，所以它的执行效率是很高的，你不再需要亲自去相关部门提交排队提交申请资料，然后还需要等几个工作日才能得到结果，现在只需要在网上填好资料点击提交，如果网络通畅，几分钟内便能办完手续，方便快捷。 第二便是较低的人为干预风险，因为智能合约是一开始就制定好的，并且是无法更改的，所以一旦出现毁约的情况，那么时间的责任人就会得到相应的惩罚，这保证了公平公正性，也就是说在智能合约面前，人人平等，没有谁有特权。 第三就是准确运行， 智能合约是一段执行在计算机上的代码，所以只要运行的计算机没错县错误，那么这个合约的执行结果都是准确无误的，不会出现不可预料的情况，之所以能做到这一点也是得益于密码学的发展和区块链技术的发明。 第四是去中心化权威，在区块链网络中一般不存在一个绝对的权威来监督合约的执行，而是由绝大部分的用户来判断合约是否正常执行，这种绝大多数人监督的方式是由POW或POS等共识机制来实现的。 第五便是较低的运行成本，正因为智能合约具有去人为干预的特点，其能够大大减少合约履行、裁决和强制执行所产生的人力成本。   关于智能合约的缺点，我讲一下我的理解，因为智能合约的一段可执行的代码，是代码便不可避免的会存在bug，一旦出现bug或者不可预料的情况，这对于采用智能合约的应用都是极大的挑战（可以参考The DAO事件），这是因为智能合约是去人工干预的。智能合约的优点目前也是它的缺点，但是随着技术的发展，它的这个缺点或许可以被忽略。 \x26gt; 五、以太坊与智能合约\n说到智能合约就不能不讲到以太坊，与比特币相比，以太坊最大的不同点是它可以支持更加强大的脚本语言（图灵完备的脚本语言），允许开发者在上面开发任意应用，实现任意智能合约，这也是以太坊的最强大之处。作为平台，以太坊可以类比于苹果的应用商店，任何开发者都可以在上面开发应用，并出售给用户。以太坊也是目前支持智能合约的区块链平台中比较成熟的平台。",
+    "inLanguage" : "zh-cn",
+    "author" : "Jalins",
+    "creator" : "Jalins",
+    "publisher": "Jalins",
+    "accountablePerson" : "Jalins",
+    "copyrightHolder" : "Jalins",
+    "copyrightYear" : "2018",
+    "datePublished": "2018-04-30 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2018-04-30 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/jalins.github.io\/2018\/%E5%8C%BA%E5%9D%97%E9%93%BE100%E7%AF%87%E4%B9%8B%E7%AC%AC%E5%85%AB%E7%AF%87-%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6\/",
+    "wordCount" : "32",
+    "keywords" : [ "基础知识","比特币", "Jalins 博客"]
+}
+</script>
+
+
+ 
+</head>
+
+  
+
+
+
+
+<script src="//cdn.busuanzi.ibruce.info/cdn/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+<script >
+    $(document).ready(function() {
+        var int = setInterval(fixCount, 50);  
+        var countOffset = parseInt(990);  
+       function fixCount() {                   
+         if ($("#busuanzi_container_site_pv").css("display") != "none")
+           {
+              $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+              clearInterval(int); 
+         }  
+     }           
+    });
+</script>
+
+
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://jalins.github.io/">Jalins 博客</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">博文</a>
+                
+                <a class="menu-item" href="/categories/" title="">分类</a>
+                
+                <a class="menu-item" href="/tags/" title="">标签</a>
+                
+                <a class="menu-item" href="/about/" title="">关于</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://jalins.github.io/">Jalins 博客</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">博文</a>
+                
+                <a class="menu-item" href="/categories/" title="">分类</a>
+                
+                <a class="menu-item" href="/tags/" title="">标签</a>
+                
+                <a class="menu-item" href="/about/" title="">关于</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">区块链100篇之第八篇  智能合约</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://jalins.github.io/" rel="author">Jalins</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2018-04-30 itemprop="datePublished">April 30, 2018</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://jalins.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"> 区块链 </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h1 id="区块链100篇之第八篇-智能合约">区块链100篇之第八篇&ndash;智能合约</h1>
+
+<hr />
+
+<blockquote>
+<p>一、比特币的转账过程</p>
+</blockquote>
+
+<p>我在第五篇讲UTXO的时候，有提到比特币的转账过程，现在来回顾一下这个过程。
+&gt; * Bob想要转给Jack一百个比特币，Bob需要先创建一笔交易，因为这笔交易只有被矿工验证并打包进区块的时候才算完成交易，Bob在填写交易信息的时候除了需要提供支付比特币的数额以及双方的地址外，还需要提供自己的公钥以及用私钥生成的数字签名，还有就是上一笔交易的Hash（也就是Bob从哪里得到这些比特币）；信息填完后（其实在现实中没这么复杂，只需要在钱包中填写转入转出地址以及交易金额即可，其他的都是自动的）便可以点击确认，当这笔交易广播到全网中时，矿工开始对这笔交易进行验证，第一步会去找到上一笔交易，确认支付方的比特币来源；接着第二步算出支付方公钥的指纹，确认与支付方的地址一致，从而保证公钥属实；然后第三步是使用公钥去解开数字签名，保证私钥属实。验证通过后矿工便会将这笔交易打包进区块中，如果得到六次以上的确认，则可以认为这笔交易不会再被改变。</p>
+
+<p>讲这个过程就是为了引出今天的知识点&ndash;智能合约。</p>
+
+<blockquote>
+<p>二、比特币与智能合约</p>
+</blockquote>
+
+<p>在上面我有讲到Bob需要提供的交易信息有一个是上一笔的交易Hash，我们可以来看一下区块链中时如何记录这笔交易的（这其实就是一个UTXO），如下图所示：
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://img-blog.csdn.net/20180930133624288?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zNzUwNDA0MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="consensus-png" class="lazyload"><figcaption class="image-caption">consensus-png</figcaption></figure>
+可以看出Bob转给Jack的100个比特币是从Alice那得到的，图中还可以看到一个解锁信息，这个解锁信息时候用来证明这100个比特币的归属，因为只有Bob的私钥才能进行解锁，其他人进行解锁是无效的。
+到这里我们可以将这个UTXO看做是一个简单的智能合约，因为它是一个可自动执行并且自我验证协议，Bob只要输入自己的私钥，解锁脚本就会自动运行校验，解锁成功便说明Bob是这100个比特币的拥有者，反之则说明不是。
+因为比特币所支持的脚本语言只跟交易有关，并且不是图灵完备的语言，所能做的事很有限，但是比特币的出现极大地促进了智能合约的发展，现在支持编写智能合约的平台中最有名的当属以太坊。</p>
+
+<blockquote>
+<p>三、智能合约</p>
+</blockquote>
+
+<p>上世纪90年代，密码学家尼克萨博从自动贩卖机得到灵感首次提出“智能合约”的概念，看一下智能合约的定义：</p>
+
+<blockquote>
+<ul>
+<li>智能合约是指一种计算机协议，这类协议一旦制定和部署成功就能实现自我执行（self-executing）和自我验证（self-verifying），而且不再需要人为的干预。</li>
+</ul>
+</blockquote>
+
+<p>智能合约会对接收到的信息进行回应，它可以接收和储存价值，也可以向外发送信息和价值。看一张图：
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://img-blog.csdn.net/20180930133740479?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zNzUwNDA0MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="consensus-png" class="lazyload"><figcaption class="image-caption">consensus-png</figcaption></figure>
+从图中可以看出一段代码（智能合约），被部署在分享的、复制的账本上，它可以维持自己的状态，控制自己的资产和对接收到的外界信息或者资产进行回应。
+举个例子，现在我们对银行账户内存款的操作都需要中心化的银行进行授权，一旦离开了银行的监管，用户就连最基本的存取款操作都无法进行，但是如果是使用智能合约来处理的话情况就不一样了，只要事先正确的通过严谨的逻辑写好代码，便可以不需要人工参与，一切都将按事先写好的逻辑运行，并且结果是公平公正的，因此也有人宣称“代码即法律”，这个观点保留意见，至少以目前的情况来看事情没那么简单。
+智能合约的概念虽然很早就被提出来了，但是因为很多技术的不成熟，所以发展很缓慢，但是因为比特币的出现或者说因为区块链技术的出现，智能合约开始成为研究人员与业内人士重点研究的对象，这都极大促进了智能合约的发展。</p>
+
+<blockquote>
+<p>四、智能合约的优缺点</p>
+</blockquote>
+
+<p>参考《区块链技术指南》简单列出智能合约的优点。</p>
+
+<blockquote>
+<ul>
+<li>首先是<strong><em>高效的实时更新</em></strong>，因为智能合约的执行是去中心化的，也就是不需要认为的干预，所以它的执行效率是很高的，你不再需要亲自去相关部门提交排队提交申请资料，然后还需要等几个工作日才能得到结果，现在只需要在网上填好资料点击提交，如果网络通畅，几分钟内便能办完手续，方便快捷。</li>
+<li>第二便是<strong><em>较低的人为干预风险</em></strong>，因为智能合约是一开始就制定好的，并且是无法更改的，所以一旦出现毁约的情况，那么时间的责任人就会得到相应的惩罚，这保证了公平公正性，也就是说在智能合约面前，人人平等，没有谁有特权。</li>
+<li>第三就是<strong><em>准确运行</em></strong>， 智能合约是一段执行在计算机上的代码，所以只要运行的计算机没错县错误，那么这个合约的执行结果都是准确无误的，不会出现不可预料的情况，之所以能做到这一点也是得益于密码学的发展和区块链技术的发明。</li>
+<li>第四是<strong><em>去中心化权威</em></strong>，在区块链网络中一般不存在一个绝对的权威来监督合约的执行，而是由绝大部分的用户来判断合约是否正常执行，这种绝大多数人监督的方式是由POW或POS等共识机制来实现的。</li>
+<li>第五便是<strong><em>较低的运行成本</em></strong>，正因为智能合约具有去人为干预的特点，其能够大大减少合约履行、裁决和强制执行所产生的人力成本。</li>
+</ul>
+</blockquote>
+
+<p>关于智能合约的缺点，我讲一下我的理解，因为智能合约的一段可执行的代码，是代码便不可避免的会存在bug，一旦出现bug或者不可预料的情况，这对于采用智能合约的应用都是极大的挑战（可以参考The DAO事件），这是因为智能合约是去人工干预的。智能合约的优点目前也是它的缺点，但是随着技术的发展，它的这个缺点或许可以被忽略。
+&gt; 五、以太坊与智能合约</p>
+
+<p>说到智能合约就不能不讲到以太坊，与比特币相比，以太坊最大的不同点是它可以支持更加强大的脚本语言（图灵完备的脚本语言），允许开发者在上面开发任意应用，实现任意智能合约，这也是以太坊的最强大之处。作为平台，以太坊可以类比于苹果的应用商店，任何开发者都可以在上面开发应用，并出售给用户。以太坊也是目前支持智能合约的区块链平台中比较成熟的平台。</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Jalins </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://jalins.github.io/2018/%E5%8C%BA%E5%9D%97%E9%93%BE100%E7%AF%87%E4%B9%8B%E7%AC%AC%E5%85%AB%E7%AF%87-%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/>https://jalins.github.io/2018/%E5%8C%BA%E5%9D%97%E9%93%BE100%E7%AF%87%E4%B9%8B%E7%AC%AC%E5%85%AB%E7%AF%87-%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/</span>
+            </p>
+            
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://jalins.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+                    #基础知识</a></span>
+            
+            <span class="tag"><a href="https://jalins.github.io/tags/%E6%AF%94%E7%89%B9%E5%B8%81/">
+                    #比特币</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://jalins.github.io/">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://jalins.github.io/2018/%E5%8C%BA%E5%9D%97%E9%93%BE100%E7%AF%87%E4%B9%8B%E7%AC%AC%E4%B8%83%E7%AF%87-%E6%AF%94%E7%89%B9%E5%B8%81%E7%9A%84%E5%88%86%E5%8F%89/" class="prev" rel="prev" title="区块链100篇之第七篇--比特币的分叉"><i class="iconfont icon-left"></i>&nbsp;区块链100篇之第七篇--比特币的分叉</a>
+         
+        
+        <a href="https://jalins.github.io/2018/%E5%8C%BA%E5%9D%97%E9%93%BE100%E7%AF%87%E4%B9%8B%E7%AC%AC%E4%B9%9D%E7%AF%87-%E9%BB%98%E5%85%8B%E5%B0%94%E6%A0%91/" class="next" rel="next" title="区块链100篇之第九篇  默克尔树">区块链100篇之第九篇  默克尔树&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2018 - 2019</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://jalins.github.io/">Jalins</a> | </span> 
+         
+
+         
+        
+        <span id="busuanzi_container_site_pv">
+         本站访问量：<span id="busuanzi_value_site_pv"></span>次
+     </span>
+     &nbsp;
+     <span id="busuanzi_container_site_uv">
+         您是本站第 <span id="busuanzi_value_site_uv"></span> 位访问者
+     </span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>
